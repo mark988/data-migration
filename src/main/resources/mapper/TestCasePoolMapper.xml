@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.datamigration.mapper.TestCasePoolMapper">
+
+    <!--
+        批量插入测试用例池记录
+        使用 MyBatis 的 foreach 标签实现批量插入
+        优点：一次SQL执行，性能高
+        返回值：插入的记录数
+    -->
+    <insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO test_case_pool (title, menu_id)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.title}, #{item.menuId})
+        </foreach>
+    </insert>
+
+</mapper>
